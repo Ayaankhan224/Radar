@@ -122,11 +122,18 @@ async function logoutUserController(req, res){
   })
 }
 
-
+/**
+ * @name getMeController
+ * @description get the 
+ */
+async function getMeController(req, res) {
+  
+}
 
 
 module.exports = { 
   registerUserController,
   loginUserController,
-  logoutUserController
+  logoutUserController,
+  getMeController
 }
