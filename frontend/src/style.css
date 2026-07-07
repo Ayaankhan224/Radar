@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 *{
   padding: 0;
   margin: 0;
@@ -9,4 +11,6 @@ html,
 #root {
   width: 100%;
   background-color: #111;
+  color: whitesmoke;
+  font-family:Arial, Helvetica, sans-serif;
 }
