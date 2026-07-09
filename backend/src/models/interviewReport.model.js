@@ -29,7 +29,7 @@ const technicalQuestionsSchema = new mongoose.Schema({
     required: [true, "Answer required"]
   }
 },{
-  _id: false2
+  _id: false
 })
 
 const behavioralQuestionsSchema = new mongoose.Schema({
@@ -46,7 +46,7 @@ const behavioralQuestionsSchema = new mongoose.Schema({
     required: [true, "Answer required"]
   }
 },{
-  _id: false2
+  _id: false
 })
 
 const skillGapSchema = new mongoose.Schema({
@@ -73,9 +73,11 @@ const preparationPlanSchema = new mongoose.Schema({
     required: [true, "Focus required"]
   },
   tasks:{
-    type: String,
+    type: [String],
     required: [true, "Tasks required"]
   }
+},{
+  _id: false
 })
 
 const interviewReportSchema = new mongoose.Schema({
