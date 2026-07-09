@@ -49,3 +49,5 @@ export async function getMe(){
     console.log(err)
   }
 }
+
+export default getMe

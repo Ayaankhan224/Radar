@@ -124,10 +124,19 @@ async function logoutUserController(req, res){
 
 /**
  * @name getMeController
- * @description get the 
+ * @description get the current logged in user details
  */
 async function getMeController(req, res) {
-  
+  const user = await userModel.findById(req.user.id)
+
+  res.status(200).json({
+    message: "User details fetched successfully",
+    user:{
+      id: user._id,
+      username: user.username,
+      email: user.email
+    }
+  })
 }
 
 
