@@ -16,6 +16,10 @@ app.use(cors({
 const authRouter = require('./routes/auth.routes')
 app.use('/api/auth',authRouter)
 
+const interviewRouter = require('./routes/interview.routes')
+app.use('/api/interview',interviewRouter)
+
+
 app.get("/testing", (req, res) => {
     console.log("Test route hit");
     res.send("OK");
