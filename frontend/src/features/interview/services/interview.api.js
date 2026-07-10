@@ -38,6 +38,14 @@ export const getAllInterviewReports = async () => {
 }
 
 /**
+ * @description Delete interview report by interviewId
+ */
+export const deleteInterviewReport = async (interviewId) => {
+  const response = await api.delete(`/api/interview/report/${interviewId}`)
+  return response.data
+}
+
+/**
  * @description Download resume PDF for an interview report
  */
 export const generateResumePdf = async ({ interviewReportId }) => {

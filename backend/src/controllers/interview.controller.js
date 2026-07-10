@@ -92,8 +92,28 @@ async function getAllInterviewReportsController(req, res) {
   })
 }
 
+/**
+ * @description Delete interview report by interviewId
+ */
+async function deleteInterviewReportController(req, res) {
+  const { interviewId } = req.params
+
+  const interviewReport = await interviewReportModel.findOneAndDelete({ _id: interviewId, user: req.user.id })
+
+  if (!interviewReport) {
+    return res.status(404).json({
+      message: "Interview report not found"
+    })
+  }
+
+  return res.status(200).json({
+    message: "Interview report deleted successfully"
+  })
+}
+
 module.exports = {
   generateInterviewReportController,
   getInterviewReportByIdController,
-  getAllInterviewReportsController
+  getAllInterviewReportsController,
+  deleteInterviewReportController
 }
