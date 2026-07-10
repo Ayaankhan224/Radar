@@ -14,9 +14,7 @@ export const generateInterviewReport = async ({ jobDescription, selfDescription,
   formData.append('resume', resumeFile)
 
   const response = await api.post('/api/interview', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data'
-    }
+    // Let the browser set the correct Content-Type with boundary for FormData
   })
 
   return response.data
@@ -36,5 +34,16 @@ export const getInterviewReportById = async (interviewId) => {
  */
 export const getAllInterviewReports = async () => {
   const response = await api.get('/api/interview')
+  return response.data
+}
+
+/**
+ * @description Download resume PDF for an interview report
+ */
+export const generateResumePdf = async ({ interviewReportId }) => {
+  const response = await api.get(`/api/interview/report/${interviewReportId}/resume`, {
+    responseType: 'blob'
+  })
+
   return response.data
 }

@@ -1,62 +1,11 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router'
 import './Report.css'
-
-const fallbackReport = {
-  score: 25,
-  technicalQuestions: [
-    {
-      question: 'How would you move from a MERN backend to Java and Spring Boot for building scalable APIs?',
-      intention: 'Checks learning agility and whether existing REST/API knowledge transfers to a different backend stack.',
-      answer: 'Explain a focused learning plan, compare Express routing with Spring controllers, practice with one CRUD API, and call out areas like dependency injection, JPA, validation, and testing.',
-    },
-    {
-      question: 'What role does Docker play in preparing an application for a Kubernetes-based deployment?',
-      intention: 'Checks whether the candidate understands the difference between containerization and orchestration.',
-      answer: 'Docker packages the app and runtime into an image. Kubernetes then schedules, scales, restarts, and connects those containers across infrastructure.',
-    },
-  ],
-  behavioralQuestions: [
-    {
-      question: 'Tell me about a time you had to learn a new technology quickly for a project.',
-      intention: 'Checks adaptability, ownership, and ability to work through unfamiliar technical areas.',
-      answer: 'Use STAR: describe the project, the learning plan, the obstacle, and the result. Tie the answer to how you would approach this role.',
-    },
-    {
-      question: 'Describe a time you handled unclear or changing requirements.',
-      intention: 'Checks communication, prioritization, and project judgment.',
-      answer: 'Explain how you clarified the goal, broke the work into smaller decisions, communicated tradeoffs, and kept progress visible.',
-    },
-  ],
-  skillGap: [
-    { skill: 'Java & Spring Boot', severity: 'high' },
-    { skill: 'AWS Services', severity: 'high' },
-    { skill: 'Microservices', severity: 'high' },
-    { skill: 'Kubernetes', severity: 'medium' },
-    { skill: 'System Design', severity: 'medium' },
-  ],
-  preparationPlan: [
-    {
-      day: 1,
-      focus: 'Java Fundamentals',
-      tasks: ['Review Java syntax, OOP, collections, and exception handling.', 'Build small command-line exercises to practice core concepts.'],
-    },
-    {
-      day: 2,
-      focus: 'Spring Boot REST APIs',
-      tasks: ['Create a Spring Boot project with controller, service, and repository layers.', 'Implement CRUD endpoints and test them with an API client.'],
-    },
-    {
-      day: 3,
-      focus: 'Databases',
-      tasks: ['Connect Spring Data JPA with PostgreSQL.', 'Practice schema design, relationships, and repository methods.'],
-    },
-  ],
-}
+import { useInterview } from '../hooks/useInterview'
 
 const Interview = () => {
+  const { report, loading } = useInterview()
   const location = useLocation()
-  const report = location.state?.interviewReport || location.state?.report || fallbackReport
   const [selectedTab, setSelectedTab] = useState('technical')
   const [expandedQuestion, setExpandedQuestion] = useState(null)
 
@@ -65,6 +14,67 @@ const Interview = () => {
     { id: 'behavioral', label: 'Behavioral Questions' },
     { id: 'roadmap', label: 'Road Map' },
   ]
+
+  if (!report) {
+    if (!loading) {
+      return (
+        <main className='report-page'>
+          <section className='report-shell'>
+            <div style={{padding: 40}}>
+              <p>No report data available.</p>
+            </div>
+          </section>
+        </main>
+      )
+    }
+
+    // Skeleton UI while loading
+    return (
+      <main className='report-page'>
+        <section className='report-shell'>
+          <aside className='report-left'>
+            <div className='report-score-panel'>
+              <p className='report-eyebrow'>Match Score</p>
+              <div className='report-score-circle' style={{background:'#e5e7eb',height:96,width:96,borderRadius:'50%'}} />
+              <p className='report-score-label' style={{height:18,width:140,background:'#e5e7eb',borderRadius:6,marginTop:12}} />
+            </div>
+
+            <nav className='report-nav' style={{marginTop:20}}>
+              {tabs.map((tab) => (
+                <div key={tab.id} style={{height:40,background:'#e5e7eb',borderRadius:8,marginBottom:10,width:160}} />
+              ))}
+            </nav>
+          </aside>
+
+          <section className='report-center'>
+            <div className='report-heading'>
+              <p className='report-eyebrow'>Selected Tab</p>
+              <h2 style={{background:'#e5e7eb',height:28,width:240,borderRadius:6}} />
+            </div>
+
+            <div className='report-question-list'>
+              {Array.from({ length: 5 }).map((_, i) => (
+                <article key={i} className='report-card' style={{padding:16}}>
+                  <div style={{height:18,width:'40%',background:'#e5e7eb',borderRadius:6,marginBottom:8}} />
+                  <div style={{height:14,width:'80%',background:'#f3f4f6',borderRadius:6,marginBottom:6}} />
+                  <div style={{height:14,width:'60%',background:'#f3f4f6',borderRadius:6}} />
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <aside className='report-right'>
+            <p className='report-eyebrow'>Skill Gaps</p>
+            <div className='report-skill-list' style={{display:'flex',flexDirection:'column',gap:10,marginTop:8}}>
+              {Array.from({ length: 3 }).map((_, idx) => (
+                <div key={idx} style={{height:32,width:160,background:'#e5e7eb',borderRadius:20}} />
+              ))}
+            </div>
+          </aside>
+        </section>
+      </main>
+    )
+  }
 
   const title = tabs.find((tab) => tab.id === selectedTab)?.label || 'Technical Questions'
   const score = report.score ?? 0

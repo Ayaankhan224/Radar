@@ -1,9 +1,20 @@
-import React from 'react'
+import React, {useState, useRef} from 'react'
+import { useInterview } from '../hooks/useInterview'
+import { useNavigate } from 'react-router'
 
 const Form = () => {
+  
+  const { generateReport, loading } = useInterview()
+  const [selfDescription, setSelfDescription] = useState('')
+  const [jobDescription, setJobDescription] = useState('')
+  const resumeInputRef = useRef(null)
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleGenerateReport = async (e) => {
     e.preventDefault()
+    const resumeFile = resumeInputRef.current.files[0]
+    const data = await generateReport({ jobDescription, selfDescription, resumeFile })
+    navigate(`/interview/${data._id}`)
   }
 
   return (
@@ -12,7 +23,7 @@ const Form = () => {
         <img className='w-full h-full object-fill' src="/formgradient.jpeg" alt="Form Gradient" />
       </div>
       <div id='form' className='flex-[0.95] bg-zinc-800 rounded-4xl md:rounded-l-none md:rounded-r-4xl flex items-center justify-center px-6 py-8'>
-        <form onSubmit={handleSubmit} className='w-full max-w-2xl h-full flex flex-col justify-center gap-5' encType='multipart/form-data'>
+        <form className='w-full max-w-2xl h-full flex flex-col justify-center gap-5' encType='multipart/form-data'>
           <div className='mb-2'>
             <p className='text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold'>Form Prep</p>
             <h1 className='text-white text-5xl font-mono font-bold tracking-tight mt-2'>Build your report</h1>
@@ -21,6 +32,7 @@ const Form = () => {
           <div className='flex flex-col gap-2'>
             <label htmlFor='selfDescription' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Self Description</label>
             <textarea
+              onChange={(e) => setSelfDescription(e.target.value)}
               id='selfDescription'
               name='selfDescription'
               rows='5'
@@ -32,6 +44,7 @@ const Form = () => {
           <div className='flex flex-col gap-2'>
             <label htmlFor='jobDescription' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Job Description</label>
             <textarea
+              onChange={(e) => setJobDescription(e.target.value)}
               id='jobDescription'
               name='jobDescription'
               rows='5'
@@ -43,6 +56,7 @@ const Form = () => {
           <div className='flex flex-col gap-2'>
             <label htmlFor='resume' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Resume PDF</label>
             <input
+              ref={resumeInputRef}
               id='resume'
               name='resume'
               type='file'
@@ -51,8 +65,8 @@ const Form = () => {
             />
           </div>
 
-          <button type='submit' className='mt-4 bg-[#f9f5d2] text-zinc-900 py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-[#f4edd0] hover:scale-[1.02] active:scale-[0.99] transition ease-in-out cursor-pointer select-none'>
-            Generate Report
+          <button disabled={loading} onClick={handleGenerateReport} type='submit' className='mt-4 bg-[#f9f5d2] text-zinc-900 py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-[#f4edd0] hover:scale-[1.02] active:scale-[0.99] transition ease-in-out cursor-pointer select-none'>
+            {loading ? "Loading...(this may take some time)" : "Generate Report"}
           </button>
         </form>
       </div>
