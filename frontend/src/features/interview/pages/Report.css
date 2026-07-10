@@ -1,0 +1,359 @@
+.report-page {
+  width: 100vw;
+  height: 100vh;
+  background: #f9f5d2;
+  padding: 16px;
+  overflow: hidden;
+}
+
+.report-shell {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr) 320px;
+  background: #18181b;
+  color: #ffffff;
+  border: 1px solid rgba(249, 245, 210, 0.25);
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.report-left {
+  border-right: 1px solid rgba(249, 245, 210, 0.25);
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.report-center {
+  min-width: 0;
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.report-right {
+  border-left: 1px solid rgba(249, 245, 210, 0.25);
+  padding: 32px 20px;
+  overflow-y: auto;
+}
+
+.report-eyebrow {
+  color: #f9f5d2;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+
+.report-score-panel {
+  border-bottom: 1px solid rgba(249, 245, 210, 0.12);
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+}
+
+.report-score-circle {
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  border: 4px solid #4ade80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  box-shadow: 0 0 0 1px rgba(74, 222, 128, 0.2);
+}
+
+.report-score-text {
+  color: #ffffff;
+  font-size: 30px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.report-score-percent {
+  color: #d4d4d8;
+  font-size: 13px;
+  line-height: 1;
+  margin-top: 2px;
+  font-weight: 700;
+}
+
+.report-score-label {
+  color: #4ade80;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.report-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.report-tab {
+  width: 100%;
+  text-align: left;
+  border-radius: 6px;
+  border: 1px solid rgba(249, 245, 210, 0.25);
+  background: #18181b;
+  color: #d4d4d8;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.report-tab:hover {
+  color: #f9f5d2;
+  border-color: rgba(249, 245, 210, 0.7);
+}
+
+.report-tab-active {
+  background: #f9f5d2;
+  color: #18181b;
+  border-color: #f9f5d2;
+}
+
+.report-heading {
+  margin-bottom: 32px;
+}
+
+.report-heading h2 {
+  color: #ffffff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 36px;
+  line-height: 1.1;
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+.report-card {
+  background: #27272a;
+  border: 1px solid rgba(249, 245, 210, 0.2);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.report-question-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.report-question-button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.report-question-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.report-question-copy p {
+  color: #f9f5d2;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.report-question-copy h3 {
+  color: #ffffff;
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.report-expand-mark {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
+
+.report-expand-mark span {
+  position: absolute;
+  top: 10px;
+  left: 3px;
+  width: 16px;
+  height: 2px;
+  border-radius: 999px;
+  background: #f9f5d2;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.report-expand-mark span:last-child {
+  transform: rotate(90deg) scaleX(1);
+}
+
+.report-expand-mark-open span:last-child {
+  transform: rotate(90deg) scaleX(0);
+  opacity: 0;
+}
+
+.report-question-details {
+  display: grid;
+  gap: 16px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 1px solid transparent;
+  transition: max-height 220ms ease, opacity 180ms ease, transform 220ms ease, margin-top 220ms ease, padding-top 220ms ease;
+}
+
+.report-question-details-open {
+  max-height: 420px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top-color: rgba(249, 245, 210, 0.14);
+}
+
+.report-question-details p {
+  color: #d4d4d8;
+  line-height: 1.6;
+}
+
+.report-detail-label {
+  color: #f9f5d2 !important;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.report-roadmap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 4px 0 4px 34px;
+}
+
+.report-roadmap-line {
+  position: absolute;
+  left: 9px;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: rgba(249, 245, 210, 0.35);
+}
+
+.report-roadmap-item {
+  position: relative;
+}
+
+.report-roadmap-dot {
+  position: absolute;
+  left: -34px;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  border: 3px solid #f9f5d2;
+  background: #18181b;
+  box-shadow: 0 0 0 4px #18181b;
+}
+
+.report-roadmap-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.report-day-badge {
+  background: rgba(249, 245, 210, 0.12);
+  color: #f9f5d2;
+  border: 1px solid rgba(249, 245, 210, 0.28);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.report-roadmap-header h3 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.report-roadmap-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #d4d4d8;
+  line-height: 1.55;
+}
+
+.report-roadmap-tasks li {
+  position: relative;
+  padding-left: 16px;
+}
+
+.report-roadmap-tasks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #d4d4d8;
+}
+
+.report-skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.report-skill-pill {
+  width: 100%;
+  min-width: 0;
+  background: #27272a;
+  border: 1px solid rgba(249, 245, 210, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.report-skill-pill p {
+  color: #ffffff;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.report-skill-pill span {
+  display: block;
+  color: #f9f5d2;
+  font-size: 14px;
+  text-transform: capitalize;
+  margin-top: 8px;
+}
+
+.report-empty {
+  text-align: center;
+}
+
+.report-empty p {
+  color: #d4d4d8;
+}
