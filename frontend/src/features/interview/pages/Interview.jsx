@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 import './Report.css'
 import { useInterview } from '../hooks/useInterview'
 

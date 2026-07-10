@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react'
 import { useInterview } from '../hooks/useInterview'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import './Form.css'
 
 const Form = () => {
