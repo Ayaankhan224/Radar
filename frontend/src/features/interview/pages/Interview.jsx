@@ -54,7 +54,7 @@ const fallbackReport = {
   ],
 }
 
-const Report = () => {
+const Interview = () => {
   const location = useLocation()
   const report = location.state?.interviewReport || location.state?.report || fallbackReport
   const [selectedTab, setSelectedTab] = useState('technical')
@@ -202,4 +202,4 @@ const Report = () => {
   )
 }
 
-export default Report
+export default Interview

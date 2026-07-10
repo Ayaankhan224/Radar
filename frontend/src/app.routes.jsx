@@ -2,8 +2,9 @@ import {createBrowserRouter} from 'react-router'
 import Login from './features/auth/pages/login'
 import Register from './features/auth/pages/register'
 import Protected from './features/auth/components/Protected'
+import Interview from './features/interview/pages/Interview'
 import Form from './features/interview/pages/Form'
-import Report from './features/interview/pages/Report'
+
 
 export const router = createBrowserRouter([
   {
@@ -17,12 +18,13 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
-  },{
-    path: '/form',
-    element: <Form />
   },
   {
-    path: '/report',
-    element: <Report />
+    path: '/form',
+    element: <Protected><Form /></Protected>
+  },
+  {
+    path: '/interview',
+    element: <Protected><Interview /></Protected>
   }
 ])

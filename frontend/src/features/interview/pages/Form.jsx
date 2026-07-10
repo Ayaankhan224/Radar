@@ -14,7 +14,7 @@ const Form = () => {
       <div id='form' className='flex-[0.95] bg-zinc-800 rounded-4xl md:rounded-l-none md:rounded-r-4xl flex items-center justify-center px-6 py-8'>
         <form onSubmit={handleSubmit} className='w-full max-w-2xl h-full flex flex-col justify-center gap-5' encType='multipart/form-data'>
           <div className='mb-2'>
-            <p className='text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold'>Interview Prep</p>
+            <p className='text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold'>Form Prep</p>
             <h1 className='text-white text-5xl font-mono font-bold tracking-tight mt-2'>Build your report</h1>
           </div>
 
