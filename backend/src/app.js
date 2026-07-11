@@ -3,11 +3,24 @@ const cookieParser = require('cookie-parser')
 const app = express()
 const cors = require('cors')
 
+const allowedOrigins = [
+    "http://localhost:5173",
+    "https://radar-woad.vercel.app",
+    process.env.FRONTEND_URL,
+    process.env.CLIENT_URL
+].filter(Boolean)
 
+app.set('trust proxy', 1)
 app.use(express.json()) 
 app.use(cookieParser())
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin(origin, callback) {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true)
+        }
+
+        return callback(new Error(`Origin ${origin} is not allowed by CORS`))
+    },
     credentials: true
 }))
 
