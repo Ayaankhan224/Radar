@@ -7,7 +7,6 @@ const Home = () => {
 
   return (
     <div className='h-screen w-screen bg-[#27272a] flex flex-col p-3'>
-      {/* Navbar */}
       <nav className='w-full h-10 flex items-center justify-between mb-2'>
         <div className='text-xl font-bold text-white tracking-tight'>RADAR</div>
         
@@ -36,12 +35,14 @@ const Home = () => {
         </a>
       </nav>
 
-      {/* Content Area */}
       {activeSection === 'home' ? (
         <div key='home' className='w-full h-full bg-[url(/bg.jpg)] bg-cover rounded-4xl flex flex-col justify-end p-14 gap-8 animate-fade-in'>
           <h1 className='text-[4.4rem] font-sans tracking-tighter font-semibold leading-20'>Know What You're Missing.<br/>Build What <span className='font-serif font-normal text-[5rem] italic'>Matters.</span></h1>
           <p className='font-sans text-zinc-800'>Stop guessing what recruiters want. RADAR analyzes your profile against any role and<br /> creates an AI-powered action plan to make you interview-ready.</p>
-          <button onClick={() => navigate('/form')} className='px-5 py-2 text-[0.8rem] bg-black rounded-4xl w-fit text-white hover:scale-110 cursor-pointer transition ease-in'>See it in action</button>
+          <div className='flex gap-4'>
+            <button onClick={() => navigate('/form')} className='px-5 py-2 text-[0.8rem] bg-black rounded-4xl w-fit text-white hover:scale-110 cursor-pointer transition ease-in'>See it in action</button>
+            <button onClick={() => navigate('/resume')} className='px-5 py-2 text-[0.8rem] border-2 border-black rounded-4xl w-fit text-white hover:scale-110 cursor-pointer transition ease-in'>Generate Resume</button>
+          </div>
         </div>
       ) : (
         <div key='about' className='w-full h-full bg-[#27272a] rounded-4xl flex flex-col items-center justify-center p-14 gap-8 animate-slide-up'>
