@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './Report.css'
 import { useInterview } from '../hooks/useInterview'
 
 const Interview = () => {
   const { report, loading } = useInterview()
-  const location = useLocation()
   const navigate = useNavigate()
   const [selectedTab, setSelectedTab] = useState('technical')
   const [expandedQuestion, setExpandedQuestion] = useState(null)

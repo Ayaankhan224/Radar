@@ -13,11 +13,11 @@ const Home = () => {
   }
 
   return (
-    <div className='h-screen w-screen bg-[#27272a] flex flex-col p-3'>
-      <nav className='w-full h-10 flex items-center justify-between mb-2'>
-        <div className='text-xl font-bold text-white tracking-tight'>RADAR</div>
+    <div className='min-h-screen w-full overflow-x-hidden bg-[#27272a] flex flex-col p-2 sm:p-3'>
+      <nav className='w-full min-h-10 flex flex-wrap items-center justify-between gap-3 mb-2 px-1'>
+        <div className='text-lg sm:text-xl font-bold text-white tracking-tight'>RADAR</div>
         
-        <div className='flex gap-6'>
+        <div className='order-3 w-full justify-center sm:order-none sm:w-auto flex gap-5 sm:gap-6'>
           <button 
             onClick={() => setActiveSection('home')}
             className={`text-sm font-medium transition-colors ${activeSection === 'home' ? 'text-white' : 'text-zinc-400 hover:text-white'}`}
@@ -32,13 +32,13 @@ const Home = () => {
           </button>
         </div>
 
-        <div className='flex items-center gap-3'>
+        <div className='flex items-center gap-2 sm:gap-3'>
           {user ? (
             <button
               type='button'
               onClick={onLogout}
               disabled={loading}
-              className='px-3 py-1 text-xs font-medium border border-white/20 text-white rounded-full hover:border-white hover:bg-white/10 disabled:opacity-60 transition-colors'
+              className='px-3 py-2 sm:py-1 text-xs font-medium border border-white/20 text-white rounded-full hover:border-white hover:bg-white/10 disabled:opacity-60 transition-colors'
             >
               Logout
             </button>
@@ -46,7 +46,7 @@ const Home = () => {
             <button
               type='button'
               onClick={() => navigate('/login')}
-              className='px-3 py-1 text-xs font-medium border border-white/20 text-white rounded-full hover:border-white hover:bg-white/10 transition-colors'
+              className='px-3 py-2 sm:py-1 text-xs font-medium border border-white/20 text-white rounded-full hover:border-white hover:bg-white/10 transition-colors'
             >
               Login
             </button>
@@ -56,7 +56,7 @@ const Home = () => {
             href='https://github.com/Ayaankhan224/Radar'
             target='_blank'
             rel='noopener noreferrer'
-            className='px-3 py-1 text-xs font-medium bg-white text-black rounded-full hover:bg-zinc-200 transition-colors'
+            className='px-3 py-2 sm:py-1 text-xs font-medium bg-white text-black rounded-full hover:bg-zinc-200 transition-colors whitespace-nowrap'
           >
             Source Code
           </a>
@@ -64,21 +64,21 @@ const Home = () => {
       </nav>
 
       {activeSection === 'home' ? (
-        <div key='home' className='w-full h-full bg-[url(/bg.jpg)] bg-cover rounded-4xl flex flex-col justify-end p-14 gap-8 animate-fade-in'>
-          <h1 className='text-[4.4rem] font-sans tracking-tighter font-semibold leading-20'>Know What You're Missing.<br/>Build What <span className='font-serif font-normal text-[5rem] italic'>Matters.</span></h1>
-          <p className='font-sans text-zinc-800'>Stop guessing what recruiters want. RADAR analyzes your profile against any role and<br /> creates an AI-powered action plan to make you interview-ready.</p>
-          <div className='flex gap-4'>
-            <button onClick={() => navigate('/form')} className='px-5 py-2 text-[0.8rem] bg-black rounded-4xl w-fit text-white hover:scale-110 cursor-pointer transition ease-in'>See it in action</button>
-            <button onClick={() => navigate('/resume')} className='px-5 py-2 text-[0.8rem] border-2 border-black rounded-4xl w-fit text-white hover:scale-110 cursor-pointer transition ease-in'>Generate Resume</button>
+        <div key='home' className='w-full flex-1 min-h-[calc(100vh-7.5rem)] sm:min-h-[calc(100vh-4.5rem)] bg-[url(/bg.jpg)] bg-cover bg-center rounded-[1.75rem] sm:rounded-4xl flex flex-col justify-end p-6 sm:p-10 lg:p-14 gap-5 sm:gap-8 animate-fade-in'>
+          <h1 className='max-w-5xl text-[clamp(2.45rem,10vw,4.4rem)] font-sans tracking-tight font-semibold leading-[0.98] text-zinc-950'>Know What You're Missing.<br className='hidden sm:block' />Build What <span className='font-serif font-normal text-[clamp(2.7rem,11vw,5rem)] italic'>Matters.</span></h1>
+          <p className='max-w-2xl font-sans text-sm sm:text-base text-zinc-800'>Stop guessing what recruiters want. RADAR analyzes your profile against any role and creates an AI-powered action plan to make you interview-ready.</p>
+          <div className='flex flex-col sm:flex-row gap-3 sm:gap-4'>
+            <button onClick={() => navigate('/form')} className='px-5 py-3 sm:py-2 text-sm sm:text-[0.8rem] bg-black rounded-4xl w-full sm:w-fit text-white hover:scale-[1.03] cursor-pointer transition ease-in'>See it in action</button>
+            <button onClick={() => navigate('/resume')} className='px-5 py-3 sm:py-2 text-sm sm:text-[0.8rem] border-2 border-black rounded-4xl w-full sm:w-fit text-zinc-950 sm:text-white hover:scale-[1.03] cursor-pointer transition ease-in'>Generate Resume</button>
           </div>
         </div>
       ) : (
-        <div key='about' className='w-full h-full bg-[#27272a] rounded-4xl flex flex-col items-center justify-center p-14 gap-8 animate-slide-up'>
-          <h1 className='text-[5rem] font-serif text-white leading-tight'>Ayaan Khan</h1>
-          <p className='font-sans text-zinc-400 text-center max-w-2xl leading-relaxed'>
+        <div key='about' className='w-full flex-1 min-h-[calc(100vh-7.5rem)] sm:min-h-[calc(100vh-4.5rem)] bg-[#27272a] rounded-[1.75rem] sm:rounded-4xl flex flex-col items-center justify-center p-6 sm:p-10 lg:p-14 gap-6 sm:gap-8 animate-slide-up'>
+          <h1 className='text-[clamp(3rem,12vw,5rem)] font-serif text-white leading-tight text-center'>Ayaan Khan</h1>
+          <p className='font-sans text-zinc-400 text-center max-w-2xl leading-relaxed text-sm sm:text-base'>
             A Designer, developer, and art guy by heart. I build digital experiences with an artist's mindset, where design, development, and creativity exist beyond aesthetics and metrics.
           </p>
-          <div className='flex gap-4'>
+          <div className='flex gap-3 sm:gap-4'>
             <a 
               href='https://instagram.com/ayaannn.6'
               target='_blank'

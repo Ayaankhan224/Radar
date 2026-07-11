@@ -5,6 +5,7 @@ const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true
 })
+
 /**
  * @description Generate new interview report on the basis of resume, userdesc, jobdesc
  */
@@ -27,7 +28,6 @@ export const getInterviewReportById = async (interviewId) => {
   const response = await api.get(`/api/interview/report/${interviewId}`)
   return response.data
 }
-
 
 /**
  * @description Get all interview reports of the logged-in user

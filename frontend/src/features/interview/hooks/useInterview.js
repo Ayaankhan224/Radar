@@ -23,6 +23,7 @@ export const useInterview = () => {
                 if (response && response.interviewReport) setReport(response.interviewReport)
         } catch (error) {
             console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }

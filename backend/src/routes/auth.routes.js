@@ -6,25 +6,23 @@ const authMiddleware = require('../middlewares/auth.middleware')
 /**
  * @route POST api/auth/register
  * @description Register a new user
- * @access Public 
+ * @access Public
  */
 authRouter.post('/register',authController.registerUserController)
-
 
 /**
  * @route POST api/auth/login
  * @description Login a user
- * @access Public 
+ * @access Public
  */
 authRouter.post('/login',authController.loginUserController)
 
 /**
  * @route GET api/auth/logout
  * @description loggin out the user
- * @access Public 
+ * @access Public
  */
 authRouter.get('/logout',authController.logoutUserController)
-
 
 /**
  * @route GET api/auth/get-me

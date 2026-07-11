@@ -1,5 +1,43 @@
 @import "tailwindcss";
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+.resume-preview-content,
+.resume-preview-content * {
+  max-width: 100%;
+}
+
+.resume-preview-content {
+  overflow-wrap: anywhere;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;

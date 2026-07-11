@@ -26,7 +26,6 @@ interviewRouter.get('/report/:interviewId', authMiddleware.authUser, interviewCo
  */
 interviewRouter.delete('/report/:interviewId', authMiddleware.authUser, interviewController.deleteInterviewReportController)
 
-
 /**
  * @route GET /api/interview/
  * @description Get all interview reports of the logged-in user

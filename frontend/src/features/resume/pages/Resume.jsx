@@ -45,8 +45,8 @@ const Resume = () => {
   }
 
   return (
-    <div className='flex h-screen w-screen bg-[#f9f5d2] p-4'>
-      <div className='hidden md:block flex-[1.05] rounded-l-4xl overflow-hidden relative'>
+    <div className='flex min-h-screen lg:h-screen w-full bg-[#f9f5d2] p-2 sm:p-4'>
+      <div className='hidden lg:block flex-[1.05] rounded-l-4xl overflow-hidden relative'>
         <img className='w-full h-full object-fill' src="/resumebg.jpg" alt="Resume Gradient" />
         <div className='absolute inset-0 bg-gradient-to-t from-zinc-900/60 to-transparent' />
         <div className='absolute bottom-8 left-8 right-8'>
@@ -55,16 +55,15 @@ const Resume = () => {
         </div>
       </div>
 
-      <div className='flex-[0.95] bg-zinc-800 rounded-4xl md:rounded-l-none md:rounded-r-4xl flex items-center justify-center px-6 py-8 overflow-hidden'>
+      <div className='flex-1 lg:flex-[0.95] bg-zinc-800 rounded-[1.75rem] sm:rounded-4xl lg:rounded-l-none lg:rounded-r-4xl flex items-center justify-center px-4 sm:px-6 py-6 sm:py-8 overflow-hidden'>
         <form className='form-scroll w-full max-w-2xl h-full flex flex-col justify-start gap-4 overflow-y-auto min-h-0 py-2' onSubmit={handleSubmit}>
           <div className='mb-2'>
             <p className='text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold'>Resume Builder</p>
-            <h1 className='text-white text-5xl font-mono font-bold tracking-tight mt-2'>Build your resume</h1>
+            <h1 className='text-white text-4xl sm:text-5xl font-mono font-bold tracking-tight mt-2'>Build your resume</h1>
           </div>
 
-          {/* Personal Information */}
           <div className='flex flex-col gap-2'>
-            <label htmlFor='fullName' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Full Name</label>
+            <label htmlFor='fullName' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Full Name</label>
             <input
               onChange={handleChange}
               id='fullName'
@@ -76,9 +75,9 @@ const Resume = () => {
             />
           </div>
 
-          <div className='grid grid-cols-2 gap-4'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
             <div className='flex flex-col gap-2'>
-              <label htmlFor='email' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Email</label>
+              <label htmlFor='email' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Email</label>
               <input
                 onChange={handleChange}
                 id='email'
@@ -90,7 +89,7 @@ const Resume = () => {
               />
             </div>
             <div className='flex flex-col gap-2'>
-              <label htmlFor='phone' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Phone</label>
+              <label htmlFor='phone' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Phone</label>
               <input
                 onChange={handleChange}
                 id='phone'
@@ -104,7 +103,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='location' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Location</label>
+            <label htmlFor='location' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Location</label>
             <input
               onChange={handleChange}
               id='location'
@@ -117,7 +116,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='linkedin' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>LinkedIn Profile</label>
+            <label htmlFor='linkedin' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>LinkedIn Profile</label>
             <input
               onChange={handleChange}
               id='linkedin'
@@ -130,7 +129,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='summary' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Professional Summary</label>
+            <label htmlFor='summary' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Professional Summary</label>
             <textarea
               onChange={handleChange}
               id='summary'
@@ -143,7 +142,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='experience' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Work Experience</label>
+            <label htmlFor='experience' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Work Experience</label>
             <textarea
               onChange={handleChange}
               id='experience'
@@ -156,7 +155,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='education' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Education</label>
+            <label htmlFor='education' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Education</label>
             <textarea
               onChange={handleChange}
               id='education'
@@ -169,7 +168,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='skills' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Skills</label>
+            <label htmlFor='skills' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Skills</label>
             <textarea
               onChange={handleChange}
               id='skills'
@@ -182,7 +181,7 @@ const Resume = () => {
           </div>
 
           <div className='flex flex-col gap-2'>
-            <label htmlFor='projects' className='text-[#f9f5d2] text-xl font-sans tracking-tight font-bold'>Projects (Optional)</label>
+            <label htmlFor='projects' className='text-[#f9f5d2] text-lg sm:text-xl font-sans tracking-tight font-bold'>Projects (Optional)</label>
             <textarea
               onChange={handleChange}
               id='projects'
@@ -194,7 +193,7 @@ const Resume = () => {
             />
           </div>
 
-          <div className='mt-4 flex gap-4'>
+          <div className='mt-4 flex flex-col sm:flex-row gap-3 sm:gap-4'>
             <button
               type='button'
               onClick={() => setFormData({
@@ -210,14 +209,14 @@ const Resume = () => {
                 projects: ''
               })}
               disabled={loading}
-              className='flex-1 border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] hover:scale-[1.02] active:scale-[0.99] transition ease-in-out cursor-pointer select-none'
+              className='flex-1 border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-4 px-6 sm:px-10 text-base sm:text-[1.1rem] rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] hover:scale-[1.02] active:scale-[0.99] transition ease-in-out cursor-pointer select-none'
             >
               Clear Form
             </button>
             <button
               type='submit'
               disabled={loading}
-              className='flex-1 bg-[#f9f5d2] text-zinc-900 py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-[#f4edd0] hover:scale-[1.02] active:scale-[0.99] disabled:opacity-60 disabled:hover:scale-100 transition ease-in-out cursor-pointer select-none'
+              className='flex-1 bg-[#f9f5d2] text-zinc-900 py-4 px-6 sm:px-10 text-base sm:text-[1.1rem] rounded-full font-bold hover:bg-[#f4edd0] hover:scale-[1.02] active:scale-[0.99] disabled:opacity-60 disabled:hover:scale-100 transition ease-in-out cursor-pointer select-none'
             >
               {loading ? "Generating Resume..." : "Generate Resume"}
             </button>

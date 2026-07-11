@@ -5,8 +5,8 @@ const mongoose = require('mongoose')
  * - job desc schema: String
  * - resume text: String
  * - self desc: String
- * 
- * 
+ *
+ *
  * OUTP
  * - score: Number
  * - technical quesns: [{ question: "", intention: "", answer: "" }]

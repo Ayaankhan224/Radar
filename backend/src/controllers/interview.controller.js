@@ -2,8 +2,6 @@ const pdfParse = require('pdf-parse')
 const generateInterviewReport = require('../services/ai.service')
 const interviewReportModel = require('../models/interviewReport.model')
 
-
-
 /**
  * @function generateInterviewReportController
  * @description Generate new interview report on the basis of resume, userdesc, jobdesc
@@ -78,7 +76,6 @@ async function getInterviewReportByIdController(req, res) {
     interviewReport
   })
 }
-
 
 /**
  * @description Get all interview reports of the logged-in user
