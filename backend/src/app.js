@@ -11,14 +11,14 @@ app.use(cors({
     credentials: true
 }))
 
-
-// requiring and using all routes
 const authRouter = require('./routes/auth.routes')
 app.use('/api/auth',authRouter)
 
 const interviewRouter = require('./routes/interview.routes')
 app.use('/api/interview',interviewRouter)
 
+const resumeRouter = require('./routes/resume.routes')
+app.use('/api/resume', resumeRouter)
 
 app.get("/testing", (req, res) => {
     console.log("Test route hit");

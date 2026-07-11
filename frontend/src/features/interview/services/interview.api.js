@@ -14,7 +14,6 @@ export const generateInterviewReport = async ({ jobDescription, selfDescription,
   formData.append('resume', resumeFile)
 
   const response = await api.post('/api/interview', formData, {
-    // Let the browser set the correct Content-Type with boundary for FormData
   })
 
   return response.data

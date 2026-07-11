@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './Report.css'
 import { useInterview } from '../hooks/useInterview'
 
 const Interview = () => {
   const { report, loading } = useInterview()
   const location = useLocation()
+  const navigate = useNavigate()
   const [selectedTab, setSelectedTab] = useState('technical')
   const [expandedQuestion, setExpandedQuestion] = useState(null)
 
@@ -28,7 +29,6 @@ const Interview = () => {
       )
     }
 
-    // Skeleton UI while loading
     return (
       <main className='report-page'>
         <section className='report-shell'>
@@ -97,6 +97,14 @@ const Interview = () => {
   return (
     <main className='report-page'>
       <section className='report-shell'>
+        <div className='flex items-center mb-4 px-6 pt-6'>
+          <button
+            onClick={() => navigate('/form')}
+            className='border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-2 px-6 rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] transition cursor-pointer select-none'
+          >
+            ← Back
+          </button>
+        </div>
         <aside className='report-left'>
           <div className='report-score-panel'>
             <p className='report-eyebrow'>Match Score</p>

@@ -100,8 +100,16 @@ const Form = () => {
       >
         {reportsPanel}
       </aside>
-      <div id='form' className='flex-[0.95] bg-zinc-800 rounded-4xl md:rounded-l-none md:rounded-r-4xl flex items-center justify-center px-6 py-8 overflow-hidden'>
-        <form className='form-scroll w-full max-w-2xl h-full flex flex-col justify-center gap-5 overflow-y-auto min-h-0 py-2' encType='multipart/form-data'>
+      <div id='form' className='flex-[0.95] bg-zinc-800 rounded-4xl md:rounded-l-none md:rounded-r-4xl flex flex-col px-6 py-8 overflow-hidden'>
+        <div className='flex items-center mb-4'>
+          <button
+            onClick={() => navigate('/')}
+            className='border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-2 px-6 rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] transition cursor-pointer select-none'
+          >
+            ← Back
+          </button>
+        </div>
+        <form className='form-scroll flex-1 w-full max-w-2xl flex flex-col justify-center gap-5 overflow-y-auto min-h-0 py-2' encType='multipart/form-data'>
           <div className='mb-2'>
             <p className='text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold'>Form Prep</p>
             <h1 className='text-white text-5xl font-mono font-bold tracking-tight mt-2'>Build your report</h1>

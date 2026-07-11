@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import './Form.css'
+import { useResume } from '../hooks/useResume'
+import { useNavigate } from 'react-router-dom'
+import '../../interview/pages/Form.css'
 
 const Resume = () => {
+  const { generateNewResume, loading } = useResume()
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -22,15 +26,18 @@ const Resume = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Resume form submitted:', formData)
+    const result = await generateNewResume(formData)
+    if (result) {
+      navigate(`/resume/${result._id}`)
+    }
   }
 
   return (
     <div className='flex h-screen w-screen bg-[#f9f5d2] p-4'>
       <div className='hidden md:block flex-[1.05] rounded-l-4xl overflow-hidden relative'>
-        <img className='w-full h-full object-fill' src="/formgradient.jpeg" alt="Resume Gradient" />
+        <img className='w-full h-full object-fill' src="/resumebg.jpg" alt="Resume Gradient" />
         <div className='absolute inset-0 bg-gradient-to-t from-zinc-900/60 to-transparent' />
         <div className='absolute bottom-8 left-8 right-8'>
           <p className='text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold mb-2'>Resume Builder</p>
@@ -198,9 +205,10 @@ const Resume = () => {
             </button>
             <button
               type='submit'
-              className='flex-1 bg-[#f9f5d2] text-zinc-900 py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-[#f4edd0] hover:scale-[1.02] active:scale-[0.99] transition ease-in-out cursor-pointer select-none'
+              disabled={loading}
+              className='flex-1 bg-[#f9f5d2] text-zinc-900 py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-[#f4edd0] hover:scale-[1.02] active:scale-[0.99] disabled:opacity-60 disabled:hover:scale-100 transition ease-in-out cursor-pointer select-none'
             >
-              Generate Resume
+              {loading ? "Generating Resume..." : "Generate Resume"}
             </button>
           </div>
         </form>
