@@ -6,12 +6,19 @@ const login = () => {
   const { loading, handleLogin } = useAuth()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await handleLogin({ email, password })
-    navigate('/')
+    setError("")
+
+    try {
+      await handleLogin({ email, password })
+      navigate('/')
+    } catch (err) {
+      setError(err.message)
+    }
   }
 
   return (
@@ -31,7 +38,8 @@ const login = () => {
             <label htmlFor="email" className="text-[#f9f5d2] text-xl font-sans tracking-tight font-bold">Email</label>
             <input
               disabled={loading}
-              onChange={(e) => { setEmail(e.target.value) }}
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setError("") }}
               id="email"
               type="email"
               placeholder="abc@example.com"
@@ -43,13 +51,20 @@ const login = () => {
             <label htmlFor="password" className="text-[#f9f5d2] text-xl font-sans tracking-tight font-bold">Password</label>
             <input
               disabled={loading}
-              onChange={(e) => { setPassword(e.target.value) }}
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setError("") }}
               id="password"
               type="password"
               placeholder="********"
               className="w-full rounded-full bg-zinc-900/80 border border-[#f9f5d2]/20 text-white placeholder:text-zinc-500 px-5 py-4 outline-none focus:border-[#f9f5d2] focus:bg-zinc-900 disabled:opacity-50 transition"
             />
           </div>
+
+          {error && (
+            <p className="rounded-2xl border border-red-300/30 bg-red-950/40 px-4 py-3 text-sm font-semibold text-red-100">
+              {error}
+            </p>
+          )}
 
           <button
             disabled={loading}

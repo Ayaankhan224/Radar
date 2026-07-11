@@ -87,7 +87,7 @@ async function loginUserController(req, res){
 
   if(!user){
     return res.status(400).json({
-      message: 'Invalid email or password'
+      message: 'No email found'
     })
   }
 
@@ -141,16 +141,42 @@ async function logoutUserController(req, res){
  * @description get the current logged in user details
  */
 async function getMeController(req, res) {
-  const user = await userModel.findById(req.user.id)
+  const token = req.cookies.token
 
-  res.status(200).json({
-    message: "User details fetched successfully",
-    user:{
-      id: user._id,
-      username: user.username,
-      email: user.email
+  if (!token) {
+    return res.status(200).json({
+      message: "No logged in user",
+      user: null
+    })
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const user = await userModel.findById(decoded.id)
+
+    if (!user) {
+      return res.status(200).json({
+        message: "No logged in user",
+        user: null
+      })
     }
-  })
+
+    return res.status(200).json({
+      message: "User details fetched successfully",
+      user:{
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    })
+  } catch (err) {
+    res.clearCookie('token', clearAuthCookieOptions)
+
+    return res.status(200).json({
+      message: "No logged in user",
+      user: null
+    })
+  }
 }
 
 

@@ -6,6 +6,10 @@ const api = axios.create({
   withCredentials: true
 })
 
+function getErrorMessage(err, fallbackMessage) {
+  return err.response?.data?.message || fallbackMessage
+}
+
 export async function register({username, email, password}) {
   
   try{
@@ -14,7 +18,7 @@ export async function register({username, email, password}) {
     })
     return response.data 
   }catch(err){
-    console.log(err)
+    throw new Error(getErrorMessage(err, 'Registration failed'))
   }
 
 }
@@ -27,7 +31,7 @@ export async function login({email, password}){
     })
     return response.data
   }catch(err){
-    console.log(err)
+    throw new Error(getErrorMessage(err, 'Login failed'))
   }
 
 }
@@ -37,7 +41,7 @@ export async function logout(){
     const response = await api.get(`/api/auth/logout`)
     return response.data
   }catch(err){
-    console.log(err)
+    throw new Error(getErrorMessage(err, 'Logout failed'))
   }
 
 }
@@ -47,7 +51,11 @@ export async function getMe(){
     const response = await api.get(`/api/auth/get-me`)
     return response.data
   }catch(err){
-    console.log(err)
+    if (err.response?.status === 401) {
+      return null
+    }
+
+    throw new Error(getErrorMessage(err, 'Could not fetch user details'))
   }
 }
 
