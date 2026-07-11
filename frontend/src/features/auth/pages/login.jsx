@@ -29,6 +29,14 @@ const login = () => {
 
       <div className="flex-[0.95] bg-zinc-800 rounded-4xl md:rounded-l-none md:rounded-r-4xl flex items-center justify-center px-6 py-8">
         <form onSubmit={handleSubmit} className="w-full max-w-xl h-full flex flex-col justify-center gap-5">
+          <button
+            type="button"
+            onClick={() => navigate('/')}
+            className="self-start border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-2 px-6 rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] transition cursor-pointer select-none"
+          >
+            ← Back
+          </button>
+
           <div className="mb-4">
             <p className="text-[#f9f5d2] text-sm uppercase tracking-[0.2em] font-semibold">Welcome back</p>
             <h1 className="text-white text-5xl font-mono font-bold tracking-tight mt-2">Login</h1>

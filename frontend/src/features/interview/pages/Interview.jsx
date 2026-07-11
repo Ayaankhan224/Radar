@@ -97,15 +97,15 @@ const Interview = () => {
   return (
     <main className='report-page'>
       <section className='report-shell'>
-        <div className='flex items-center mb-4 px-6 pt-6'>
+        <aside className='report-left'>
           <button
+            type='button'
             onClick={() => navigate('/form')}
-            className='border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-2 px-6 rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] transition cursor-pointer select-none'
+            className='report-back-button'
           >
             ← Back
           </button>
-        </div>
-        <aside className='report-left'>
+
           <div className='report-score-panel'>
             <p className='report-eyebrow'>Match Score</p>
             <div className='report-score-circle'>
