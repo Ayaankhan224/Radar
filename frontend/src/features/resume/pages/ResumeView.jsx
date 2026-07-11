@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useResume } from '../hooks/useResume'
 import { useParams, useNavigate } from 'react-router-dom'
 import '../../interview/pages/Form.css'
@@ -7,9 +7,38 @@ const ResumeView = () => {
   const { resume, loading, downloadPdf, deleteResumeById } = useResume()
   const { resumeId } = useParams()
   const navigate = useNavigate()
+  const [downloadError, setDownloadError] = useState('')
+
+  const openPrintFallback = () => {
+    const iframe = document.createElement('iframe')
+    iframe.style.position = 'fixed'
+    iframe.style.right = '0'
+    iframe.style.bottom = '0'
+    iframe.style.width = '0'
+    iframe.style.height = '0'
+    iframe.style.border = '0'
+    iframe.srcdoc = resume.htmlContent
+    document.body.appendChild(iframe)
+
+    iframe.onload = () => {
+      iframe.contentWindow?.focus()
+      iframe.contentWindow?.print()
+
+      window.setTimeout(() => {
+        iframe.remove()
+      }, 1000)
+    }
+  }
 
   const handleDownload = async () => {
-    await downloadPdf(resumeId)
+    setDownloadError('')
+
+    try {
+      await downloadPdf(resumeId)
+    } catch (err) {
+      setDownloadError('PDF download failed, so opened print view. Choose "Save to PDF" in the print dialog.')
+      openPrintFallback()
+    }
   }
 
   const handleDelete = async () => {
@@ -59,9 +88,10 @@ const ResumeView = () => {
           <div className='flex gap-4'>
             <button
               onClick={handleDownload}
+              disabled={loading}
               className='bg-[#f9f5d2] text-zinc-900 py-2 px-6 rounded-full font-bold hover:bg-[#f4edd0] transition cursor-pointer select-none'
             >
-              Download PDF
+              {loading ? 'Preparing...' : 'Download PDF'}
             </button>
             <button
               onClick={handleDelete}
@@ -71,6 +101,12 @@ const ResumeView = () => {
             </button>
           </div>
         </div>
+
+        {downloadError && (
+          <p className='mb-4 rounded-2xl border border-red-300/30 bg-red-950/40 px-4 py-3 text-sm font-semibold text-red-100'>
+            {downloadError}
+          </p>
+        )}
 
         <div className='flex-1 overflow-y-auto form-scroll bg-white rounded-3xl p-8'>
           <div dangerouslySetInnerHTML={{ __html: resume.htmlContent }} />

@@ -65,8 +65,11 @@ export const useResume = () => {
             link.setAttribute("download", `resume_${id}.pdf`)
             document.body.appendChild(link)
             link.click()
+            link.remove()
+            window.URL.revokeObjectURL(url)
+            return true
         } catch (error) {
-            console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }

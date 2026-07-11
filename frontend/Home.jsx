@@ -1,9 +1,16 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from './src/features/auth/hooks/useAuth'
 
 const Home = () => {
   const navigate = useNavigate()
+  const { user, loading, handleLogout } = useAuth()
   const [activeSection, setActiveSection] = useState('home')
+
+  const onLogout = async () => {
+    await handleLogout()
+    navigate('/')
+  }
 
   return (
     <div className='h-screen w-screen bg-[#27272a] flex flex-col p-3'>
@@ -25,14 +32,35 @@ const Home = () => {
           </button>
         </div>
 
-        <a 
-          href='https://github.com/Ayaankhan224/Radar'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='px-3 py-1 text-xs font-medium bg-white text-black rounded-full hover:bg-zinc-200 transition-colors'
-        >
-          Source Code
-        </a>
+        <div className='flex items-center gap-3'>
+          {user ? (
+            <button
+              type='button'
+              onClick={onLogout}
+              disabled={loading}
+              className='px-3 py-1 text-xs font-medium border border-white/20 text-white rounded-full hover:border-white hover:bg-white/10 disabled:opacity-60 transition-colors'
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              type='button'
+              onClick={() => navigate('/login')}
+              className='px-3 py-1 text-xs font-medium border border-white/20 text-white rounded-full hover:border-white hover:bg-white/10 transition-colors'
+            >
+              Login
+            </button>
+          )}
+
+          <a 
+            href='https://github.com/Ayaankhan224/Radar'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='px-3 py-1 text-xs font-medium bg-white text-black rounded-full hover:bg-zinc-200 transition-colors'
+          >
+            Source Code
+          </a>
+        </div>
       </nav>
 
       {activeSection === 'home' ? (

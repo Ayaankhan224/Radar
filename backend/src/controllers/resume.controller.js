@@ -2,6 +2,23 @@ const generateResumeHtml = require('../services/resumeAi.service')
 const resumeModel = require('../models/resume.model')
 const puppeteer = require('puppeteer')
 
+function getPuppeteerLaunchOptions() {
+  const executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath()
+
+  return {
+    headless: 'new',
+    executablePath,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--no-zygote',
+      '--single-process'
+    ]
+  }
+}
+
 /**
  * @function generateResumeController
  * @description Generate resume PDF from form data
@@ -112,6 +129,8 @@ async function deleteResumeController(req, res) {
  * @description Download resume PDF
  */
 async function downloadResumePdfController(req, res) {
+  let browser
+
   try {
     const { resumeId } = req.params
 
@@ -123,14 +142,12 @@ async function downloadResumePdfController(req, res) {
       })
     }
 
-    const browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    })
+    browser = await puppeteer.launch(getPuppeteerLaunchOptions())
     const page = await browser.newPage()
 
     await page.setContent(resume.htmlContent, {
-      waitUntil: 'networkidle0'
+      waitUntil: 'load',
+      timeout: 60000
     })
 
     const pdfBuffer = await page.pdf({
@@ -145,8 +162,6 @@ async function downloadResumePdfController(req, res) {
       preferCSSPageSize: true
     })
 
-    await browser.close()
-
     res.setHeader('Content-Type', 'application/pdf')
     res.setHeader('Content-Disposition', `attachment; filename="resume_${resume.fullName.replace(/\s+/g, '_')}.pdf"`)
     res.send(pdfBuffer)
@@ -156,6 +171,10 @@ async function downloadResumePdfController(req, res) {
       message: "Failed to generate PDF",
       error: error.message
     })
+  } finally {
+    if (browser) {
+      await browser.close()
+    }
   }
 }
 
