@@ -6,6 +6,7 @@ import '../../interview/pages/Form.css'
 const Resume = () => {
   const { generateNewResume, loading } = useResume()
   const navigate = useNavigate()
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -20,6 +21,7 @@ const Resume = () => {
   })
 
   const handleChange = (e) => {
+    setError('')
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -28,9 +30,17 @@ const Resume = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const result = await generateNewResume(formData)
-    if (result) {
-      navigate(`/resume/${result._id}`)
+    setError('')
+
+    try {
+      const result = await generateNewResume(formData)
+      if (result?._id) {
+        navigate(`/resume/${result._id}`)
+      } else {
+        setError('Resume generated, but no resume id was returned. Please try again.')
+      }
+    } catch (err) {
+      setError(err.message)
     }
   }
 
@@ -199,6 +209,7 @@ const Resume = () => {
                 skills: '',
                 projects: ''
               })}
+              disabled={loading}
               className='flex-1 border border-[#f9f5d2]/20 bg-zinc-900/80 text-[#f9f5d2] py-4 px-10 text-[1.1rem] rounded-full font-bold hover:bg-zinc-900 hover:border-[#f9f5d2] hover:scale-[1.02] active:scale-[0.99] transition ease-in-out cursor-pointer select-none'
             >
               Clear Form
@@ -211,6 +222,12 @@ const Resume = () => {
               {loading ? "Generating Resume..." : "Generate Resume"}
             </button>
           </div>
+
+          {error && (
+            <p className='rounded-2xl border border-red-300/30 bg-red-950/40 px-4 py-3 text-sm font-semibold text-red-100'>
+              {error}
+            </p>
+          )}
         </form>
       </div>
     </div>

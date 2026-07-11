@@ -20,7 +20,7 @@ export const useResume = () => {
             response = await generateResume(formData)
             if (response && response.resume) setResume(response.resume)
         } catch (error) {
-            console.log(error)
+            throw error
         } finally {
             setLoading(false)
         }
@@ -90,8 +90,6 @@ export const useResume = () => {
     useEffect(() => {
         if (resumeId) {
             getResume(resumeId)
-        } else {
-            getResumes()
         }
     }, [resumeId])
 
